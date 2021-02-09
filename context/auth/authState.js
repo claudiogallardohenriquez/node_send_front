@@ -113,7 +113,6 @@ const AuthState = ({ children }) => {
         })
     };
 
-
     return (
         <authContext.Provider
             value={{
