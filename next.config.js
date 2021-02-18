@@ -1,6 +1,6 @@
 module.exports = {
     env: {
-        backendURL: 'http://localhost:4000',
-        frontendURL: 'http://localhost:3000'
+        backendURL: 'https://mighty-fortress-70271.herokuapp.com/',
+        frontendURL: 'https://y-n1ljdg6nr.vercel.app/'
     }
 }
