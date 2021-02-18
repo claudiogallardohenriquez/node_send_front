@@ -2,11 +2,18 @@ import React, { useState, useCallback, useContext } from 'react';
 import { useDropzone } from 'react-dropzone';
 import clienteAxios from '../config/axios';
 import appContext from '../context/app/appContext';
+import authContext from '../context/auth/authContext';
+import Formulario from './Formulario';
 
 const DropZone = () => {
 
     const AppContext = useContext(appContext);
     const { cargando, mostrarAlerta, subirArchivos, crearEnlace } = AppContext;
+
+
+    const AuthContext = useContext(authContext);
+    const { usuario, autenticado } = AuthContext;
+
 
     const onDropRejected = () => {
         mostrarAlerta('No se pudo subir');
@@ -38,6 +45,11 @@ const DropZone = () => {
                     <ul>
                         { archivos }
                     </ul>
+
+                    {
+                        autenticado ? <Formulario /> : ''
+                    }
+
                     { cargando ? <p className="my-10 text-center text-gray-600">Subiendo archivo...</p> : (
                         <button 
                             onClick={() => crearEnlace() }

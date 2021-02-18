@@ -6,7 +6,10 @@ import  {
     SUBIR_ARCHIVO_EXITO,
     SUBIR_ARCHIVO_ERROR,
     CREAR_ENLACE_EXITO,
-    CREAR_ENLACE_ERROR
+    CREAR_ENLACE_ERROR,
+    LIMPIAR_STATE,
+    AGREGAR_PASSWORD,
+    AGREGAR_DESCARGAS
 } from '../../types';
 import appContext from './appContext';
 import appReducer from './appReducer';
@@ -30,12 +33,10 @@ const AppState = ({children}) => {
 
     //Muestra una alerta
     const mostrarAlerta = msg => {
-        console.log(msg);
-        dispatchEvent({
+        dispatch({
             type: MOSTRAR_ALERTA,
             payload: msg
-        })
-         
+        })  
     }
 
     // Sube los archivos al servidor
@@ -86,10 +87,32 @@ const AppState = ({children}) => {
         }
     };
 
+    const limpiarState = () => {
+        console.log('Limpiando Stated...');
+        dispatch({
+            type: LIMPIAR_STATE
+        });
+    }
+
+    const agregarPassword = password => {
+        dispatch({
+            type: AGREGAR_PASSWORD,
+            payload: password
+        });
+    }
+
+    // Agrega un numero de descargas
+    const agregarDescargas = cantidadDescargas  => {
+        dispatch({
+            type: AGREGAR_DESCARGAS,
+            payload: cantidadDescargas
+        });
+    };
+
     return (
         <appContext.Provider
         value={{
-            initialState: state.mensaje_archivo,
+            mensaje_archivo: state.mensaje_archivo,
             nombre: state.nombre,
             nombre_original: state.nombre_original,
             cargando: state.cargando,
@@ -99,7 +122,10 @@ const AppState = ({children}) => {
             url: state.url,
             mostrarAlerta,
             subirArchivos,
-            crearEnlace
+            crearEnlace,
+            limpiarState,
+            agregarPassword,
+            agregarDescargas
         }}
         >
             {children}
